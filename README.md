@@ -1,6 +1,17 @@
 # Next.js Blog Demo Application
 
-A simple and modern blog application built with Next.js 13+, showcasing clean routing and user-friendly interface.
+A simple and modern blog application built with Next.js 13+, showcasing clean routing and a user-friendly interface.
+
+## 🚀 Next.js Features Implemented
+
+- Code Splitting: Automatic code splitting at the page level for optimized loading performance
+- Dynamic Component Loading: Lazy loading of components to improve initial page load time
+- Route Optimization: Implementing app router with optimized routing structure
+- Server Components: Leveraging React Server Components for improved performance and reduced client-side JavaScript
+- API Routes: Custom API endpoints for data processing and handling
+- Progressive Loading: Implementing loading states and suspense boundaries for better UX
+- Client-side State Management: Efficient state handling for data and user interactions
+- Error Boundaries: Graceful error handling for failed processing attempts
 
 ## 🚀 Features
 
