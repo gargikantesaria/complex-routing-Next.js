@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import styles from './page.module.css';
 import { PostService } from '../service';
+import Header from '../../header'
 
 // Define the validation schema
 const postSchema = z.object({
@@ -82,10 +83,7 @@ export default function NewPost() {
 
     return (
         <div className={styles.container}>
-            {/* Logo */}
-            <div className={styles.ownaiLogo}>
-                <a href="https://ownai.net/" target="_blank">own<b>AI</b></a>
-            </div>
+            <Header />
 
             {/* Header */}
             <div className={styles.header}>

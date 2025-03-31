@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { PostService } from './service';
-import styles from './posts.module.css';
+import { PostService } from '../service';
+import styles from '../posts.module.css';
 
 interface DeleteButtonProps {
     postId: number;

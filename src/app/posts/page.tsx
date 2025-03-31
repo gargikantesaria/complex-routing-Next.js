@@ -2,7 +2,13 @@ import Link from "next/link";
 import styles from './posts.module.css';  // Import the styles
 import { PostService } from './service';  // Import the PostService
 import type { Post } from '../types/post';
-import DeleteButton from './DeleteButton';  // Add this import at the top
+import dynamic from 'next/dynamic';
+import Header from '../header';
+
+const DynamicBlogCard = dynamic(() => import('./component/blogcard'), {
+    loading: () => <p>Loading....</p>,
+    ssr: true
+});
 
 // Use the PostService for fetching
 const fetchPosts = async () => {
@@ -23,9 +29,7 @@ export default async function PostsList() {
     if (posts === undefined) {
         return (
             <div className={styles.container}>
-                <div className={styles.ownaiLogo}>
-                    <a href="https://ownai.net/" target="_blank">own<b>AI</b></a>
-                </div>
+                <Header />
                 <div className={styles.loading}>
                     Loading posts...
                 </div>
@@ -39,9 +43,7 @@ export default async function PostsList() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.ownaiLogo}>
-                <a href="https://ownai.net/" target="_blank">own<b>AI</b></a>
-            </div>
+            <Header />
             <div className={styles.header}>
                 <Link href="/" className={styles.homeButton}>
                     <span>← Home</span>
@@ -55,20 +57,7 @@ export default async function PostsList() {
             </div>
             <div className={styles.grid}>
                 {posts.map((post: Post) => (
-                    <Link href={`/posts/${post.id}`} key={post.id} className={styles.card}>
-                        <div className={styles.cardHeader}>
-                            <h2>{post.title}</h2>
-                        </div>
-                        <div className={styles.cardBody}>
-                            <p>{post.body.substring(0, 150)}...</p>
-                        </div>
-                        <div className={styles.cardFooter}>
-                            <div className={styles.metadata}>
-                                <span>Views: {post.views}</span>
-                                <DeleteButton postId={post.id} />
-                            </div>
-                        </div>
-                    </Link>
+                    <DynamicBlogCard key={post.id} blogInfo={post} />
                 ))}
             </div>
         </div>

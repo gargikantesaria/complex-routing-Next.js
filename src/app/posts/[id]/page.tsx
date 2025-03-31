@@ -1,10 +1,16 @@
 import styles from './page.module.css';
 import { PostService } from '../service';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 import type { Post } from '@/app/types/post';
+import Header from '../../header'
+import dynamic from 'next/dynamic';
 
-// export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+// Dynamic import of PostDetail component
+const PostDetail = dynamic(() => import('../component/postDetail'), {
+    loading: () => <p>Loading...</p>,
+    ssr: true
+});
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     const awaitedParams = await params;
     const id = Number(awaitedParams.id);
@@ -37,8 +43,6 @@ async function fetchPostById(id: number): Promise<Post> {
     }
 }
 
-// ✅ Correctly await params inside the component
-// export default async function Post({ params }: { params: { id: string } }) {
 export default async function Post({ params }: { params: Promise<{ id: string }> }) {
     const awaitedParams = await params;
     const id = Number(awaitedParams.id);
@@ -46,11 +50,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
     if (isNaN(id)) {
         return (
             <div className={styles.errorContainer}>
-                <div className={styles.ownaiLogo}>
-                    <a href="https://ownai.net/" target="_blank" rel="noopener noreferrer">
-                        own<b>AI</b>
-                    </a>
-                </div>
+                <Header />
                 <Link href="/posts" className={styles.backLink}>← Back to Posts</Link>
                 <div className={styles.error}>Invalid Post ID.</div>
             </div>
@@ -62,43 +62,15 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
 
         return (
             <div className={styles.container}>
-                <div className={styles.ownaiLogo}>
-                    <a href="https://ownai.net/" target="_blank" rel="noopener noreferrer">
-                        own<b>AI</b>
-                    </a>
-                </div>
-                <div className={styles.header}>
-                    <Link href="/posts" className={styles.backLink}>← Back to Posts</Link>
-                    <h1 className={styles.title}>{post.title}</h1>
-                    <div className={styles.metadata}>
-                        <span className={styles.views}>👁 {post.views || 0} views</span>
-                        <div className={styles.reactions}>
-                            <span className={styles.likes}>👍 {post.reactions?.likes ?? 0}</span>
-                            <span className={styles.dislikes}>👎 {post.reactions?.dislikes ?? 0}</span>
-                        </div>
-                    </div>
-                    <div className={styles.tags}>
-                        {post.tags?.map((tag: string) => (
-                            <span key={tag} className={styles.tag}>{tag}</span>
-                        ))}
-                    </div>
-                </div>
-                <div className={styles.content}>
-                    <p className={styles.postContent}>{post.body}</p>
-                </div>
-                <div className={styles.footer}>
-                    <span className={styles.userId}>Post ID: {post.userId}</span>
-                </div>
+                <Header />
+                <Link href="/posts" className={styles.backLink}>← Back to Posts</Link>
+                <PostDetail postDetail={post} />
             </div>
         );
     } catch (error) {
         return (
             <div className={styles.errorContainer}>
-                <div className={styles.ownaiLogo}>
-                    <a href="https://ownai.net/" target="_blank" rel="noopener noreferrer">
-                        own<b>AI</b>
-                    </a>
-                </div>
+                <Header />
                 <Link href="/posts" className={styles.backLink}>← Back to Posts</Link>
                 <div className={styles.error}>{(error as Error).message}</div>
             </div>

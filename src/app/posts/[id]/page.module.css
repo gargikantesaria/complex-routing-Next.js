@@ -39,12 +39,6 @@
     letter-spacing: -0.02em;
 }
 
-.ownaiLogo {
-    text-align: end;
-    font-size: 22px;
-    color: var(--primary-blue);
-}
-
 .metadata {
     display: flex;
     align-items: center;
@@ -131,7 +125,7 @@
 
 .errorContainer {
     background-color: #fff;
-    border-radius: 12px; 
+    border-radius: 12px;
     padding: 0 1.5rem;
     background-color: #f8f9fa;
     min-height: 100vh;

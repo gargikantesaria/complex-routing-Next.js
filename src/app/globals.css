@@ -42,3 +42,9 @@ a {
     color-scheme: dark;
   }
 }
+
+.ownaiLogo {
+  text-align: end;
+  font-size: 22px;
+  color: var(--primary-blue);
+}

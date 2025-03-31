@@ -9,12 +9,6 @@
     margin-bottom: 30px;
 }
 
-.ownaiLogo {
-    text-align: end;
-    font-size: 22px;
-    color: var(--primary-blue);
-}
-
 .homeButton {
     display: inline-flex;
     align-items: center;
