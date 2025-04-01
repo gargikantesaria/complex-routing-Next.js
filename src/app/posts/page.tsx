@@ -5,7 +5,7 @@ import type { Post } from '../types/post';
 import dynamic from 'next/dynamic';
 import Header from '../header';
 
-const DynamicBlogCard = dynamic(() => import('./component/blogcard'), {
+const DynamicBlogCard = dynamic(() => import('./component/blogPostCard'), {
     loading: () => <p>Loading....</p>,
     ssr: true
 });
